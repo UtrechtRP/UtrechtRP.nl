@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Utrecht Roleplay</title>
+    <link rel="icon" href="server_logo.webp" type="image/webp" />
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+
+    <style>
+        /* Algemene stijl */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Poppins", sans-serif;
+        }
+
+        body {
+            background: url("background.webp") no-repeat center center/cover;
+            background-attachment: fixed;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        /* Particle achtergrond overlay */
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        /* Navigatiebar */
+        header {
+            width: 100%;
+            padding: 15px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 0 25px rgba(0,0,0,0.8);
+            position: fixed;
+            top: 0;
+            z-index: 1000;
+        }
+
+        header img {
+            height: 60px;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 18px;
+            padding: 8px 15px;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+
+        nav ul li a:hover {
+            background: #00bfff;
+            color: black;
+            box-shadow: 0 0 15px #00bfff;
+            transform: scale(1.1);
+        }
+
+        /* Hero Sectie */
+        .hero {
+            text-align: center;
+            padding: 180px 20px 120px;
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        .hero img {
+            height: 150px;
+            margin-bottom: 20px;
+            filter: drop-shadow(0 0 25px #00bfff);
+        }
+
+        .hero h1 {
+            font-size: 60px;
+            color: #00bfff;
+            text-shadow: 0 0 30px #00bfff;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            font-size: 22px;
+            opacity: 0.9;
+        }
+
+        /* Sollicitaties Sectie */
+        .sollicitaties {
+            max-width: 1100px;
+            margin: 60px auto;
+            padding: 40px;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 15px;
+            box-shadow: 0 0 35px rgba(0,0,0,0.9);
+            text-align: center;
+        }
+
+        .sollicitaties h2 {
+            font-size: 40px;
+            color: #00bfff;
+            margin-bottom: 30px;
+        }
+
+        .sollicitaties-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 30px;
+        }
+
+        .sollicitatie-card {
+            background: rgba(255,255,255,0.05);
+            padding: 20px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: transform 0.3s ease, background 0.3s ease;
+            box-shadow: 0 0 10px rgba(0,191,255,0.2);
+        }
+
+        .sollicitatie-card:hover {
+            transform: scale(1.08);
+            background: rgba(255,255,255,0.15);
+            box-shadow: 0 0 25px #00bfff;
+        }
+
+        .sollicitatie-card img {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 10px;
+        }
+
+        /* Staff Sectie */
+        .staff {
+            max-width: 1100px;
+            margin: 60px auto;
+            padding: 40px;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 15px;
+            box-shadow: 0 0 35px rgba(0,0,0,0.9);
+            text-align: center;
+        }
+
+        .staff h2 {
+            font-size: 40px;
+            color: #00bfff;
+            margin-bottom: 30px;
+        }
+
+        .staff-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+            gap: 35px;
+        }
+
+        .staff-card {
+            background: rgba(255,255,255,0.05);
+            padding: 20px;
+            border-radius: 15px;
+            position: relative;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            box-shadow: 0 0 15px rgba(0, 191, 255, 0.1);
+        }
+
+        .staff-card:hover {
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: 0 0 35px rgba(0,191,255,0.7);
+        }
+
+        .staff-card img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            margin-bottom: 10px;
+            box-shadow: 0 0 20px #00bfff;
+            transition: transform 0.3s;
+        }
+
+        .staff-card:hover img {
+            transform: rotate(3deg) scale(1.08);
+        }
+
+        .staff-card p {
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        /* Badge voor rollen */
+        .badge {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 8px;
+            margin-top: 5px;
+            font-size: 14px;
+            font-weight: bold;
+            box-shadow: 0 0 8px currentColor;
+        }
+
+        .supervisor { color: #00bfff; border: 1px solid #00bfff; }
+        .admin { color: #ff0077; border: 1px solid #ff0077; }
+        .moderator { color: #00ff94; border: 1px solid #00ff94; }
+        .support { color: #ffd700; border: 1px solid #ffd700; }
+
+        /* Shop Sectie */
+        .shop {
+            max-width: 600px;
+            margin: 60px auto;
+            padding: 40px;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 15px;
+            box-shadow: 0 0 25px rgba(0,0,0,0.9);
+            text-align: center;
+        }
+
+        .shop h2 {
+            font-size: 36px;
+            color: #00bfff;
+        }
+
+        .shop p {
+            font-size: 24px;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { text-shadow: 0 0 10px #00bfff; }
+            50% { text-shadow: 0 0 25px #00bfff; }
+            100% { text-shadow: 0 0 10px #00bfff; }
+        }
+
+        /* Discord Sectie */
+        .discord {
+            max-width: 600px;
+            margin: 60px auto;
+            padding: 40px;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 0 25px rgba(0,0,0,0.9);
+        }
+
+        .discord h2 {
+            color: #00bfff;
+            margin-bottom: 20px;
+        }
+
+        .discord a {
+            display: inline-block;
+            margin: 10px;
+            padding: 15px 25px;
+            background: #00bfff;
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            transition: background 0.3s;
+        }
+
+        .discord a:hover {
+            background: #008fcc;
+            box-shadow: 0 0 15px #00bfff;
+        }
+
+        /* APV Floating knop */
+        .apv-float {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            background: #00bfff;
+            color: white;
+            padding: 15px 20px;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 16px;
+            box-shadow: 0 0 15px #00bfff;
+            transition: 0.3s;
+            z-index: 2000;
+            text-decoration: none;
+        }
+
+        .apv-float:hover {
+            background: #008fcc;
+            box-shadow: 0 0 25px #00bfff;
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body>
+    <!-- Particle Background -->
+    <div id="particles-js"></div>
+
+    <!-- Navigatie -->
+    <header>
+        <img src="server_logo.webp" alt="Utrecht Logo">
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="https://docs.google.com/document/d/1SLi_lUfo8YDmtOm-1dwQ3rdzrKlQW_qSicNEYhatXt8/edit" target="_blank">APV</a></li>
+                <li><a href="#sollicitaties">Sollicitaties</a></li>
+                <li><a href="#staff">Staff</a></li>
+                <li><a href="#shop">Shop</a></li>
+                <li><a href="#discord">Discord</a></li>
+                <li><a href="#" onclick="openJoinPopup()">Join FiveM</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero -->
+    <section id="home" class="hero">
+        <img src="server_logo.webp" alt="Server Logo">
+        <h1>Utrecht Roleplay</h1>
+        <p>De realistische Nederlandse RP ervaring</p>
+    </section>
+
+    <!-- Sollicitaties -->
+    <section id="sollicitaties" class="sollicitaties">
+        <h2>Solliciteer Hier</h2>
+        <div class="sollicitaties-grid">
+            <a href="https://docs.google.com/forms/d/13j9bFmUXb9DaMr3msSke8UeCUMw6o8HgO2U8_gBCToE" target="_blank" class="sollicitatie-card">
+                <img src="politie.webp" alt="Politie"><p>Politie</p>
+            </a>
+            <a href="https://docs.google.com/forms/d/1H46BEu8XKHE0pVIIkOm_rlh1NyrjtKPS6fmLJ3ZGc2g" target="_blank" class="sollicitatie-card">
+                <img src="Kmar.webp" alt="KMar"><p>KMar</p>
+            </a>
+            <div class="sollicitatie-card">
+                <img src="ambu.webp" alt="Ambulance"><p>Ambulance (In Dev)</p>
+            </div>
+            <div class="sollicitatie-card">
+                <img src="anwb.webp" alt="ANWB"><p>ANWB (In Dev)</p>
+            </div>
+            <div class="sollicitatie-card">
+                <img src="advocaat.webp" alt="Advocaat"><p>Advocaat (In Dev)</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Staff -->
+    <section id="staff" class="staff">
+        <h2>Staff Team</h2>
+        <div class="staff-grid">
+            <div class="staff-card">
+                <img src="yous.webp" alt="Yous">
+                <p>!Yous💡</p>
+                <span class="badge supervisor">Supervisor</span>
+            </div>
+            <div class="staff-card">
+                <img src="zeno.webp" alt="Zeno">
+                <p>Zeno</p>
+                <span class="badge admin">Hoge Raad</span>
+            </div>
+            <div class="staff-card">
+                <img src="jurre.webp" alt="Jurre">
+                <p>[URP] Jurre</p>
+                <span class="badge supervisor">Supervisor</span>
+            </div>
+            <div class="staff-card">
+                <img src="belg.webp" alt="Belg">
+                <p>Belg</p>
+                <span class="badge moderator">President</span>
+            </div>
+            <div class="staff-card">
+                <img src="coz7.webp" alt="Coz7">
+                <p>Coz7</p>
+                <span class="badge support">President</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Shop -->
+    <section id="shop" class="shop">
+        <h2>Shop</h2>
+        <p>🚧 Coming Soon 🚧</p>
+    </section>
+
+    <!-- Discord -->
+    <section id="discord" class="discord">
+        <h2>Onze Discords</h2>
+        <a href="#">Onderwereld Discord</a>
+        <a href="#">Overheid Discord</a>
+        <a href="#">Support Discord</a>
+    </section>
+
+    <!-- APV Floating knop -->
+    <a href="https://docs.google.com/document/d/1SLi_lUfo8YDmtOm-1dwQ3rdzrKlQW_qSicNEYhatXt8/edit"
+       class="apv-float" target="_blank">📜 APV</a>
+
+    <!-- Particles.js Script -->
+    <script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
+    <script>
+        particlesJS.load('particles-js', 'https://cdn.jsdelivr.net/gh/VincentGarreau/particles.js/particles.json');
+    </script>
+</body>
+</html>
