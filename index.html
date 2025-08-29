@@ -9,31 +9,24 @@
 
   <style>
     /* ===== Base / Variables ===== */
-    *{margin:0;padding:0;box-sizing:border-box;font-family:"Poppins",sans-serif}
+    * { margin:0; padding:0; box-sizing:border-box; font-family:"Poppins",sans-serif }
     :root{
-      --pri:#00bfff; --pri-2:#66e0ff; --pri-3:#7dffe3;
+      --pri:#00bfff; --pri-2:#66e0ff; --pri-3:#7dffe3; --pri-4:#0ab0e5;
       --glass:rgba(255,255,255,.06); --glass-2:rgba(255,255,255,.12);
-      --line:rgba(0,191,255,.12);
     }
+    /* Veiligheid: pseudo-elementen mogen kliks nooit tegenhouden */
+    *::before, *::after { pointer-events: none !important; }
+
     body{
-      background:url("background.webp") no-repeat center/cover fixed; color:#fff; overflow-x:hidden;
-      position:relative;
+      background:url("background.webp") no-repeat center/cover fixed;
+      color:#fff; overflow-x:hidden; position:relative;
     }
-    #particles-js{position:fixed;inset:0;z-index:-2}
-    /* Subtiele premium grid glow overlay */
-    body::before{
-      content:""; position:fixed; inset:0; z-index:-1; pointer-events:none;
-      background:
-        radial-gradient(60% 60% at 50% 20%, rgba(0,191,255,.12), rgba(0,0,0,.55) 70%),
-        repeating-linear-gradient( to right, transparent 0 98px, var(--line) 98px 99px ),
-        repeating-linear-gradient( to bottom, transparent 0 98px, var(--line) 98px 99px );
-      mix-blend-mode:screen;
-    }
+    #particles-js{ position:fixed; inset:0; z-index:-2 }
 
     /* ===== Premium helpers ===== */
     .title-grad{
       background:linear-gradient(90deg,var(--pri),#7db8ff,var(--pri-3),var(--pri));
-      -webkit-background-clip:text;background-clip:text;color:transparent;
+      -webkit-background-clip:text; background-clip:text; color:transparent;
       background-size:300% 100%; animation:grad 7s linear infinite;
       text-shadow:0 0 18px rgba(0,191,255,.28);
     }
@@ -45,14 +38,11 @@
       border:1px solid rgba(255,255,255,.08); box-shadow:0 10px 30px rgba(0,0,0,.35);
       position:relative; overflow:hidden;
     }
-    /* Card shine effect */
-    .shine{
-      position:relative; overflow:hidden; isolation:isolate;
-    }
+    .shine{ position:relative; isolation:isolate; }
     .shine::after{
       content:""; position:absolute; inset:-200% -50%; transform:rotate(12deg);
-      background:linear-gradient(90deg, transparent, rgba(255,255,255,.09), transparent);
-      transition:transform .6s ease; z-index:0;
+      background:linear-gradient(90deg,transparent,rgba(255,255,255,.08),transparent);
+      transition:transform .6s ease; z-index:0; /* pointer-events none via global regel */
     }
     .shine:hover::after{ transform:translateX(60%) rotate(12deg); }
 
@@ -63,8 +53,8 @@
       position:fixed; top:0; z-index:1000; border-bottom:1px solid rgba(255,255,255,.06);
       box-shadow:0 0 25px rgba(0,0,0,.8);
     }
-    header img{height:56px;filter:drop-shadow(0 0 16px var(--pri))}
-    nav ul{display:flex;list-style:none;gap:26px}
+    header img{ height:56px; filter:drop-shadow(0 0 16px var(--pri)) }
+    nav ul{ display:flex; list-style:none; gap:26px }
     nav a{
       color:#fff; text-decoration:none; font-weight:600; font-size:17px; padding:10px 14px; border-radius:10px;
       position:relative; transition:transform .25s ease,color .25s ease;
@@ -75,114 +65,129 @@
       transform:scaleX(0); transform-origin:center; transition:transform .3s ease;
       filter:drop-shadow(0 0 6px var(--pri));
     }
-    nav a:hover{color:#cfffff; transform:translateY(-2px)}
-    nav a:hover::after{transform:scaleX(1)}
+    nav a:hover{ color:#cfffff; transform:translateY(-2px) }
+    nav a:hover::after{ transform:scaleX(1) }
 
     /* ===== Hero ===== */
     .hero{
       text-align:center; padding:180px 20px 120px;
       background:radial-gradient(60% 60% at 50% 20%, rgba(0,191,255,.15), rgba(0,0,0,.4) 70%);
     }
-    .hero img{height:150px;margin-bottom:18px;filter:drop-shadow(0 0 25px var(--pri));animation:floaty 6s ease-in-out infinite}
+    .hero img{ height:150px; margin-bottom:18px; filter:drop-shadow(0 0 25px var(--pri)); animation:floaty 6s ease-in-out infinite }
     @keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
-    .hero h1{font-size:62px;margin-bottom:10px}
-    .hero p{font-size:22px;opacity:.92;letter-spacing:.2px}
+    .hero h1{ font-size:62px; margin-bottom:10px }
+    .hero p{ font-size:22px; opacity:.92; letter-spacing:.2px }
+
+    /* ===== Sections ===== */
+    .sollicitaties h2, .staff h2, .shop h2, .discord h2{ font-size:40px; margin-bottom:26px }
 
     /* ===== Sollicitaties ===== */
-    .sollicitaties h2,.staff h2,.shop h2,.discord h2{font-size:40px;margin-bottom:26px}
     .sollicitaties-grid{
-      display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:28px;
+      display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:28px;
     }
     .sollicitatie-card{
-      background:var(--glass); padding:22px; border-radius:14px; cursor:pointer;
-      transition:transform .28s ease, background .28s ease, box-shadow .28s ease, rotate .28s ease;
+      background:var(--glass); padding:22px; border-radius:16px; cursor:pointer;
+      transition:transform .28s ease, background .28s ease, box-shadow .28s ease;
       box-shadow:0 0 10px rgba(0,191,255,.18);
       border:1px solid rgba(255,255,255,.06);
+      position:relative; display:block; z-index:2; pointer-events:auto;
     }
-    .sollicitatie-card:hover{
-      transform:translateY(-6px) scale(1.03) rotate(-.3deg);
-      background:var(--glass-2); box-shadow:0 0 28px rgba(0,191,255,.45);
+    .sollicitatie-card:hover{ transform:translateY(-6px) scale(1.03); background:var(--glass-2); box-shadow:0 0 28px rgba(0,191,255,.45) }
+    .sollicitatie-card img{ width:90px; height:90px; margin-bottom:12px }
+    .sollicitatie-card p{ font-size:18px; font-weight:700 }
+    .ribbon{
+      position:absolute; top:12px; right:-18px; rotate:15deg; z-index:1;
+      background:linear-gradient(90deg,var(--pri),var(--pri-4)); color:#001018;
+      font-weight:900; font-size:12px; padding:6px 24px; border-radius:999px;
+      box-shadow:0 8px 16px rgba(0,191,255,.25);
+      border:1px solid rgba(255,255,255,.25);
     }
-    .sollicitatie-card img{width:86px;height:86px;margin-bottom:12px}
-    .sollicitatie-card p{font-size:18px}
 
     /* ===== Staff ===== */
-    .staff-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:35px}
+    .staff-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:35px }
     .staff-card{
       background:var(--glass); padding:22px; border-radius:16px; position:relative;
       transition:transform .35s ease, box-shadow .35s ease; border:1px solid rgba(255,255,255,.06);
       box-shadow:0 6px 18px rgba(0,191,255,.12);
-      transform-style:preserve-3d;
+      transform-style:preserve-3d; z-index:2; pointer-events:auto;
     }
-    .staff-card:hover{transform:translateY(-10px) rotate3d(1, -1, 0, 6deg); box-shadow:0 0 40px rgba(0,191,255,.6)}
+    .staff-card:hover{ transform:translateY(-10px) rotate3d(1,-1,0,6deg); box-shadow:0 0 40px rgba(0,191,255,.6) }
     .staff-card img{
-      width:120px;height:120px;border-radius:50%;margin-bottom:10px;
+      width:120px; height:120px; border-radius:50%; margin-bottom:10px;
       box-shadow:0 0 22px var(--pri); transition:transform .3s; position:relative; z-index:1;
     }
-    .staff-card:hover img{transform:rotate(2deg) scale(1.06)}
-    .staff-card p{font-size:18px;font-weight:700;letter-spacing:.2px;position:relative;z-index:1}
+    .staff-card:hover img{ transform:rotate(2deg) scale(1.06) }
+    .staff-card p{ font-size:18px; font-weight:800; letter-spacing:.2px; position:relative; z-index:1 }
 
-    /* Badges */
     .badge{
-      display:inline-flex;align-items:center;gap:8px;
-      padding:7px 12px;border-radius:999px;margin-top:8px;font-size:13px;font-weight:800;
-      border:1px solid currentColor;box-shadow:0 0 10px currentColor; position:relative; z-index:1;
+      display:inline-flex; align-items:center; gap:8px;
+      padding:7px 12px; border-radius:999px; margin-top:8px; font-size:13px; font-weight:900;
+      border:1px solid currentColor; box-shadow:0 0 10px currentColor; position:relative; z-index:1;
     }
-    .badge svg{width:16px;height:16px}
+    .president{ color:#ffd86b; border-color:#ffd86b; background:radial-gradient(80% 80% at 30% 20%, rgba(255,216,107,.22), rgba(0,0,0,0)); text-shadow:0 0 8px rgba(255,216,107,.35) }
+    .supervisor{ color:var(--pri-2); border-color:var(--pri-2) }
+    .admin{ color:#ff66a6; border-color:#ff66a6; opacity:.98 } /* Hoge Raad */
 
-    .president{
-      color:#ffd86b;border-color:#ffd86b;
-      background:radial-gradient(80% 80% at 30% 20%, rgba(255,216,107,.22), rgba(0,0,0,0));
-      text-shadow:0 0 8px rgba(255,216,107,.35);
+    /* ===== Discord ===== */
+    .discord-grid{
+      display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:22px;
     }
-    .supervisor{color:var(--pri-2);border-color:var(--pri-2)}
-    .admin{color:#ff66a6;border-color:#ff66a6;opacity:.98} /* Hoge Raad */
-    .moderator{color:#00ff94;border-color:#00ff94}
-    .support{color:#ffd700;border-color:#ffd700}
+    .discord-card{
+      display:flex; align-items:center; justify-content:space-between; gap:14px;
+      padding:18px 22px; border-radius:16px; text-decoration:none; color:#fff;
+      background:var(--glass); border:1px solid rgba(255,255,255,.08);
+      transition:transform .25s ease, box-shadow .25s ease, background .25s ease;
+      z-index:2; pointer-events:auto;
+    }
+    .discord-card:hover{ transform:translateY(-4px); box-shadow:0 0 22px rgba(0,191,255,.45); background:var(--glass-2) }
+    .discord-left{ display:flex; align-items:center; gap:14px }
+    .discord-icon{
+      width:44px; height:44px; border-radius:12px; display:grid; place-items:center;
+      background:linear-gradient(180deg,var(--pri),var(--pri-4)); box-shadow:0 6px 14px rgba(0,191,255,.35);
+      flex:0 0 auto;
+    }
+    .discord-title{ font-weight:900; font-size:18px; }
+    .discord-arrow{ font-size:18px; opacity:.9 }
 
     /* Shop */
-    .shop p{font-size:24px;animation:pulse 1.5s infinite}
+    .shop p{ font-size:24px; animation:pulse 1.5s infinite }
     @keyframes pulse{0%{text-shadow:0 0 10px var(--pri)}50%{text-shadow:0 0 26px var(--pri)}100%{text-shadow:0 0 10px var(--pri)}}
-
-    /* Discord Buttons */
-    .discord a{
-      display:inline-block;margin:10px;padding:15px 26px;
-      background:linear-gradient(180deg,var(--pri),#0ab0e5);
-      color:#fff;text-decoration:none;border-radius:12px;font-weight:700;
-      transition:transform .25s ease, box-shadow .25s ease, filter .25s ease;
-      border:1px solid rgba(255,255,255,.08);
-    }
-    .discord a:hover{transform:translateY(-3px);box-shadow:0 0 18px var(--pri);filter:brightness(1.08)}
 
     /* APV Floating */
     .apv-float{
-      position:fixed;bottom:24px;right:24px;background:linear-gradient(90deg,var(--pri),#0ab0e5);
-      color:#fff;padding:14px 20px;border-radius:999px;font-weight:800;font-size:15px;
-      box-shadow:0 0 15px var(--pri);transition:.3s;z-index:2000;text-decoration:none;
+      position:fixed; bottom:24px; right:24px; background:linear-gradient(90deg,var(--pri),#0ab0e5);
+      color:#fff; padding:14px 20px; border-radius:999px; font-weight:800; font-size:15px;
+      box-shadow:0 0 15px var(--pri); transition:.3s; z-index:2000; text-decoration:none;
       border:1px solid rgba(255,255,255,.12);
+      pointer-events:auto;
     }
-    .apv-float:hover{transform:translateY(-3px) scale(1.03);box-shadow:0 0 25px var(--pri)}
+    .apv-float:hover{ transform:translateY(-3px) scale(1.03); box-shadow:0 0 25px var(--pri) }
 
     /* Popup */
     #join-popup{
-      display:none;position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);
-      background:rgba(0,0,0,.93);padding:46px;border-radius:18px;box-shadow:0 0 28px rgba(0,0,0,.8);
-      z-index:2000;text-align:center;max-width:460px;width:calc(100% - 40px);
+      display:none; position:fixed; top:50%; left:50%; transform:translate(-50%,-50%);
+      background:rgba(0,0,0,.93); padding:46px; border-radius:18px; box-shadow:0 0 28px rgba(0,0,0,0.8);
+      z-index:2000; text-align:center; max-width:460px; width:calc(100% - 40px);
       border:1px solid rgba(255,255,255,.07);
     }
-    #join-popup h2{color:var(--pri);margin-bottom:10px}
-    #join-popup p{font-size:18px;opacity:.95}
+    #join-popup h2{ color:var(--pri); margin-bottom:10px }
+    #join-popup p{ font-size:18px; opacity:.95 }
     #join-popup button{
-      margin-top:20px;padding:10px 20px;background:linear-gradient(180deg,var(--pri),#0ab0e5);
-      color:#fff;border:none;border-radius:10px;cursor:pointer;transition:.25s;
-      border:1px solid rgba(255,255,255,.12);font-weight:800;
+      margin-top:20px; padding:10px 20px; background:linear-gradient(180deg,var(--pri),#0ab0e5);
+      color:#fff; border:none; border-radius:10px; cursor:pointer; transition:.25s;
+      border:1px solid rgba(255,255,255,.12); font-weight:800; pointer-events:auto;
     }
-    #join-popup button:hover{transform:translateY(-2px);box-shadow:0 0 16px var(--pri)}
+    #join-popup button:hover{ transform:translateY(-2px); box-shadow:0 0 16px var(--pri) }
 
     /* Footer */
     footer{
-      text-align:center;padding:22px;background:rgba(0,0,0,.85);color:#cfd9ff;margin-top:60px;
+      text-align:center; padding:22px; background:rgba(0,0,0,.85); color:#cfd9ff; margin-top:60px;
       border-top:1px solid rgba(255,255,255,.06)
+    }
+
+    /* Accessibility focus */
+    a:focus-visible, button:focus-visible{
+      outline:3px solid var(--pri-3); outline-offset:2px; border-radius:12px;
     }
   </style>
 </head>
@@ -217,72 +222,62 @@
   <section id="sollicitaties" class="sollicitaties glassbox shine">
     <h2 class="title-grad">Solliciteer Hier</h2>
     <div class="sollicitaties-grid">
-      <a href="https://docs.google.com/forms/d/13j9bFmUXb9DaMr3msSke8UeCUMw6o8HgO2U8_gBCToE/viewform" target="_blank" class="sollicitatie-card shine">
+      <a href="https://docs.google.com/forms/d/13j9bFmUXb9DaMr3msSke8UeCUMw6o8HgO2U8_gBCToE/viewform" target="_blank" class="sollicitatie-card shine" aria-label="Politie sollicitatie">
+        <span class="ribbon">Open formulier</span>
         <img src="politie.webp" alt="Politie"><p>Politie</p>
       </a>
-      <a href="https://docs.google.com/forms/d/1H46BEu8XKHE0pVIIkOm_rlh1NyrjtKPS6fmLJ3ZGc2g/viewform" target="_blank" class="sollicitatie-card shine">
+      <a href="https://docs.google.com/forms/d/1H46BEu8XKHE0pVIIkOm_rlh1NyrjtKPS6fmLJ3ZGc2g/viewform" target="_blank" class="sollicitatie-card shine" aria-label="KMar sollicitatie">
+        <span class="ribbon">Open formulier</span>
         <img src="Kmar.webp" alt="KMar"><p>KMar</p>
       </a>
-      <a href="https://docs.google.com/forms/d/108eBGSCO5BmNuow_p2nlQulUX79mi2nYaVL1rcMAhiY/viewform" target="_blank" class="sollicitatie-card shine">
+      <a href="https://docs.google.com/forms/d/108eBGSCO5BmNuow_p2nlQulUX79mi2nYaVL1rcMAhiY/viewform" target="_blank" class="sollicitatie-card shine" aria-label="ANWB sollicitatie">
+        <span class="ribbon">Open formulier</span>
         <img src="anwb.webp" alt="ANWB"><p>ANWB</p>
       </a>
-      <a href="https://docs.google.com/forms/d/1RDu1C2aHNYv0GrAHNmSZ0nTuA-IjmGsdTjFj6gr0lMo/viewform" target="_blank" class="sollicitatie-card shine">
+      <a href="https://docs.google.com/forms/d/1RDu1C2aHNYv0GrAHNmSZ0nTuA-IjmGsdTjFj6gr0lMo/viewform" target="_blank" class="sollicitatie-card shine" aria-label="Ambulance sollicitatie">
+        <span class="ribbon">Open formulier</span>
         <img src="ambu.webp" alt="Ambulance"><p>Ambulance</p>
       </a>
-      <a href="https://docs.google.com/forms/d/1e41-murHyWbpxXGhDhuz3jxPSPQOkU6G6Wv1FKQenFM/viewform" target="_blank" class="sollicitatie-card shine">
+      <a href="https://docs.google.com/forms/d/1e41-murHyWbpxXGhDhuz3jxPSPQOkU6G6Wv1FKQenFM/viewform" target="_blank" class="sollicitatie-card shine" aria-label="Advocaat sollicitatie">
+        <span class="ribbon">Open formulier</span>
         <img src="advocaat.webp" alt="Advocaat"><p>Advocaat</p>
       </a>
     </div>
   </section>
 
-  <!-- Staff (President > Supervisor > Hoge Raad) -->
+  <!-- Staff (Coz7 > Belg > Supervisor > Hoge Raad) -->
   <section id="staff" class="staff glassbox shine">
     <h2 class="title-grad">Staff Team</h2>
     <div class="staff-grid">
-      <!-- Presidents (Coz7 eerst, dan Belg) -->
+      <!-- Presidents -->
       <div class="staff-card shine">
         <img src="coz7.webp" alt="Coz7">
         <p>Coz7</p>
-        <span class="badge president">
-          👑
-          <!-- crown svg -->
-          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 7l4 3 3-5 4 5 4-3 3 12H0L3 7zm2.2 10h13.6l-1-4.1-2.6 1.9-3-3.8-2.8 4-2.9-2-1.3 4z"/></svg>
-          President
-        </span>
+        <span class="badge president">👑 President</span>
       </div>
       <div class="staff-card shine">
         <img src="belg.webp" alt="Belg">
         <p>Belg</p>
-        <span class="badge president">
-          👑
-          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 7l4 3 3-5 4 5 4-3 3 12H0L3 7zm2.2 10h13.6l-1-4.1-2.6 1.9-3-3.8-2.8 4-2.9-2-1.3 4z"/></svg>
-          President
-        </span>
+        <span class="badge president">👑 President</span>
       </div>
 
-      <!-- Supervisor(s) -->
+      <!-- Supervisors -->
       <div class="staff-card shine">
         <img src="jurre.webp" alt="Jurre">
         <p>[URP] Jurre</p>
-        <span class="badge supervisor">
-          🛡️ Supervisor
-        </span>
+        <span class="badge supervisor">🛡️ Supervisor</span>
       </div>
 
-      <!-- Hoge Raad (lager dan Supervisor) -->
+      <!-- Hoge Raad -->
       <div class="staff-card shine">
         <img src="yous.webp" alt="Yous">
         <p>[URP] ! Yous💡</p>
-        <span class="badge admin">
-          ⚖️ Hoge Raad
-        </span>
+        <span class="badge admin">⚖️ Hoge Raad</span>
       </div>
       <div class="staff-card shine">
         <img src="zeno.webp" alt="Zeno">
         <p>[URP] Zeno</p>
-        <span class="badge admin">
-          ⚖️ Hoge Raad
-        </span>
+        <span class="badge admin">⚖️ Hoge Raad</span>
       </div>
     </div>
   </section>
@@ -296,9 +291,43 @@
   <!-- Discord -->
   <section id="discord" class="discord glassbox shine">
     <h2 class="title-grad">Onze Discords</h2>
-    <a href="https://discord.gg/u75Dx94uQH" target="_blank">Onderwereld</a>
-    <a href="https://discord.gg/5DraMgeKnf" target="_blank">Hoofd</a>
-    <a href="https://discord.gg/ffZe8zCM5R" target="_blank">Support</a>
+    <div class="discord-grid">
+      <a class="discord-card" href="https://discord.gg/5DraMgeKnf" target="_blank" aria-label="Main Discord">
+        <div class="discord-left">
+          <div class="discord-icon">
+            <svg viewBox="0 0 24 24" width="24" height="24" fill="#001018" aria-hidden="true">
+              <path d="M20.317 4.369A19.91 19.91 0 0 0 16.558 3c-.177.312-.381.73-.523 1.061a18.27 18.27 0 0 0-4.07 0A7.26 7.26 0 0 0 11.44 3c-1.38.246-2.73.64-3.76 1.37C4.22 7.44 3.53 10.42 3.8 13.36c1.58 1.18 3.11 1.9 4.62 2.37.37-.5.7-1.04.99-1.61-.55-.2-1.08-.45-1.57-.74.13-.1.26-.2.38-.31 2.98 1.39 6.21 1.39 9.17 0 .13.11.25.21.38.31-.49.29-1.02.54-1.57.74.29.57.62 1.11.99 1.61 1.52-.48 3.06-1.2 4.63-2.37.33-3.46-.5-6.37-2.41-8.99ZM9.7 12.91c-.9 0-1.64-.83-1.64-1.85s.72-1.86 1.64-1.86c.91 0 1.65.83 1.64 1.86 0 1.02-.73 1.85-1.64 1.85Zm4.62 0c-.9 0-1.64-.83-1.64-1.85s.73-1.86 1.64-1.86 1.65.83 1.64 1.86c0 1.02-.73 1.85-1.64 1.85Z"/>
+            </svg>
+          </div>
+          <span class="discord-title">Main Discord</span>
+        </div>
+        <span class="discord-arrow">↗</span>
+      </a>
+
+      <a class="discord-card" href="https://discord.gg/u75Dx94uQH" target="_blank" aria-label="Onderwereld Discord">
+        <div class="discord-left">
+          <div class="discord-icon">
+            <svg viewBox="0 0 24 24" width="24" height="24" fill="#001018" aria-hidden="true">
+              <path d="M20.317 4.369A19.91 19.91 0 0 0 16.558 3c-.177.312-.381.73-.523 1.061a18.27 18.27 0 0 0-4.07 0A7.26 7.26 0 0 0 11.44 3c-1.38.246-2.73.64-3.76 1.37C4.22 7.44 3.53 10.42 3.8 13.36c1.58 1.18 3.11 1.9 4.62 2.37.37-.5.7-1.04.99-1.61-.55-.2-1.08-.45-1.57-.74.13-.1.26-.2.38-.31 2.98 1.39 6.21 1.39 9.17 0 .13.11.25.21.38.31-.49.29-1.02.54-1.57.74.29.57.62 1.11.99 1.61 1.52-.48 3.06-1.2 4.63-2.37.33-3.46-.5-6.37-2.41-8.99ZM9.7 12.91c-.9 0-1.64-.83-1.64-1.85s.73-1.86 1.64-1.86c.91 0 1.65.83 1.64 1.86 0 1.02-.73 1.85-1.64 1.85Zm4.62 0c-.9 0-1.64-.83-1.64-1.85s.73-1.86 1.64-1.86 1.65.83 1.64 1.86c0 1.02-.73 1.85-1.64 1.85Z"/>
+            </svg>
+          </div>
+          <span class="discord-title">Onderwereld Discord</span>
+        </div>
+        <span class="discord-arrow">↗</span>
+      </a>
+
+      <a class="discord-card" href="https://discord.gg/ffZe8zCM5R" target="_blank" aria-label="Support Discord">
+        <div class="discord-left">
+          <div class="discord-icon">
+            <svg viewBox="0 0 24 24" width="24" height="24" fill="#001018" aria-hidden="true">
+              <path d="M20.317 4.369A19.91 19.91 0 0 0 16.558 3c-.177.312-.381.73-.523 1.061a18.27 18.27 0 0 0-4.07 0A7.26 7.26 0 0 0 11.44 3c-1.38.246-2.73.64-3.76 1.37C4.22 7.44 3.53 10.42 3.8 13.36c1.58 1.18 3.11 1.9 4.62 2.37.37-.5.7-1.04.99-1.61-.55-.2-1.08-.45-1.57-.74.13-.1.26-.2.38-.31 2.98 1.39 6.21 1.39 9.17 0 .13.11.25.21.38.31-.49.29-1.02.54-1.57.74.29.57.62 1.11.99 1.61 1.52-.48 3.06-1.2 4.63-2.37.33-3.46-.5-6.37-2.41-8.99ZM9.7 12.91c-.9 0-1.64-.83-1.64-1.85s.73-1.86 1.64-1.86c.91 0 1.65.83 1.64 1.86 0 1.02-.73 1.85-1.64 1.85Zm4.62 0c-.9 0-1.64-.83-1.64-1.85s.73-1.86 1.64-1.86 1.65.83 1.64 1.86c0 1.02-.73 1.85-1.64 1.85Z"/>
+            </svg>
+          </div>
+          <span class="discord-title">Support Discord</span>
+        </div>
+        <span class="discord-arrow">↗</span>
+      </a>
+    </div>
   </section>
 
   <!-- APV Floating knop -->
@@ -320,6 +349,7 @@
   <script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
   <script>
     particlesJS.load('particles-js','https://cdn.jsdelivr.net/gh/VincentGarreau/particles.js/particles.json');
+
     function openJoinPopup(){ document.getElementById("join-popup").style.display="block"; }
     function closeJoinPopup(){ document.getElementById("join-popup").style.display="none"; }
   </script>
