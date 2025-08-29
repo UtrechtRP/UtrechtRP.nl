@@ -14,7 +14,7 @@
       --pri:#00bfff; --pri-2:#66e0ff; --pri-3:#7dffe3; --pri-4:#0ab0e5;
       --glass:rgba(255,255,255,.06); --glass-2:rgba(255,255,255,.12);
     }
-    /* Veiligheid: pseudo-elementen mogen kliks nooit tegenhouden */
+    /* Pseudo-elementen blokkeren nooit kliks */
     *::before, *::after { pointer-events: none !important; }
 
     body{
@@ -42,7 +42,7 @@
     .shine::after{
       content:""; position:absolute; inset:-200% -50%; transform:rotate(12deg);
       background:linear-gradient(90deg,transparent,rgba(255,255,255,.08),transparent);
-      transition:transform .6s ease; z-index:0; /* pointer-events none via global regel */
+      transition:transform .6s ease; z-index:0;
     }
     .shine:hover::after{ transform:translateX(60%) rotate(12deg); }
 
@@ -163,22 +163,6 @@
     }
     .apv-float:hover{ transform:translateY(-3px) scale(1.03); box-shadow:0 0 25px var(--pri) }
 
-    /* Popup */
-    #join-popup{
-      display:none; position:fixed; top:50%; left:50%; transform:translate(-50%,-50%);
-      background:rgba(0,0,0,.93); padding:46px; border-radius:18px; box-shadow:0 0 28px rgba(0,0,0,0.8);
-      z-index:2000; text-align:center; max-width:460px; width:calc(100% - 40px);
-      border:1px solid rgba(255,255,255,.07);
-    }
-    #join-popup h2{ color:var(--pri); margin-bottom:10px }
-    #join-popup p{ font-size:18px; opacity:.95 }
-    #join-popup button{
-      margin-top:20px; padding:10px 20px; background:linear-gradient(180deg,var(--pri),#0ab0e5);
-      color:#fff; border:none; border-radius:10px; cursor:pointer; transition:.25s;
-      border:1px solid rgba(255,255,255,.12); font-weight:800; pointer-events:auto;
-    }
-    #join-popup button:hover{ transform:translateY(-2px); box-shadow:0 0 16px var(--pri) }
-
     /* Footer */
     footer{
       text-align:center; padding:22px; background:rgba(0,0,0,.85); color:#cfd9ff; margin-top:60px;
@@ -206,7 +190,8 @@
         <li><a href="#staff">Staff</a></li>
         <li><a href="#shop">Shop</a></li>
         <li><a href="#discord">Discord</a></li>
-        <li><a href="#" onclick="openJoinPopup()">Join FiveM</a></li>
+        <!-- ✅ Join FiveM direct -->
+        <li><a href="https://cfx.re/join/gleyam" target="_blank">Join FiveM</a></li>
       </ul>
     </nav>
   </header>
@@ -333,13 +318,6 @@
   <!-- APV Floating knop -->
   <a href="https://docs.google.com/document/d/1SLi_lUfo8YDmtOm-1dwQ3rdzrKlQW_qSicNEYhatXt8/edit" class="apv-float" target="_blank">📜 APV</a>
 
-  <!-- Join FiveM Popup -->
-  <div id="join-popup">
-    <h2>Utrecht Roleplay</h2>
-    <p>Onze FiveM-server is momenteel in ontwikkeling. Check onze Discord voor updates!</p>
-    <button onclick="closeJoinPopup()">Sluiten</button>
-  </div>
-
   <!-- Footer -->
   <footer>
     &copy; 2025 Utrecht Roleplay | Gemaakt door !Yous💡
@@ -349,9 +327,6 @@
   <script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
   <script>
     particlesJS.load('particles-js','https://cdn.jsdelivr.net/gh/VincentGarreau/particles.js/particles.json');
-
-    function openJoinPopup(){ document.getElementById("join-popup").style.display="block"; }
-    function closeJoinPopup(){ document.getElementById("join-popup").style.display="none"; }
   </script>
 </body>
 </html>
