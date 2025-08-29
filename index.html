@@ -17,47 +17,40 @@
             box-sizing: border-box;
             font-family: "Poppins", sans-serif;
         }
-
         body {
             background: url("background.webp") no-repeat center center/cover;
             background-attachment: fixed;
             color: #fff;
             overflow-x: hidden;
         }
-
-        /* Particle achtergrond overlay */
         #particles-js {
             position: fixed;
             width: 100%;
             height: 100%;
             z-index: -1;
         }
-
-        /* Navigatiebar */
+        /* Header */
         header {
             width: 100%;
             padding: 15px 50px;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(10px);
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: rgba(0, 0, 0, 0.7);
-            backdrop-filter: blur(10px);
-            box-shadow: 0 0 25px rgba(0,0,0,0.8);
             position: fixed;
             top: 0;
             z-index: 1000;
+            box-shadow: 0 0 25px rgba(0,0,0,0.8);
         }
-
         header img {
             height: 60px;
         }
-
         nav ul {
             display: flex;
             list-style: none;
             gap: 30px;
         }
-
         nav ul li a {
             color: white;
             text-decoration: none;
@@ -67,40 +60,35 @@
             border-radius: 8px;
             transition: all 0.3s;
         }
-
         nav ul li a:hover {
             background: #00bfff;
             color: black;
             box-shadow: 0 0 15px #00bfff;
             transform: scale(1.1);
         }
-
-        /* Hero Sectie */
+        /* Hero */
         .hero {
             text-align: center;
             padding: 180px 20px 120px;
             background: rgba(0, 0, 0, 0.5);
         }
-
         .hero img {
             height: 150px;
             margin-bottom: 20px;
             filter: drop-shadow(0 0 25px #00bfff);
         }
-
         .hero h1 {
             font-size: 60px;
             color: #00bfff;
             text-shadow: 0 0 30px #00bfff;
             margin-bottom: 10px;
         }
-
         .hero p {
             font-size: 22px;
             opacity: 0.9;
         }
 
-        /* Sollicitaties Sectie */
+        /* Sollicitaties */
         .sollicitaties {
             max-width: 1100px;
             margin: 60px auto;
@@ -110,19 +98,16 @@
             box-shadow: 0 0 35px rgba(0,0,0,0.9);
             text-align: center;
         }
-
         .sollicitaties h2 {
             font-size: 40px;
             color: #00bfff;
             margin-bottom: 30px;
         }
-
         .sollicitaties-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
             gap: 30px;
         }
-
         .sollicitatie-card {
             background: rgba(255,255,255,0.05);
             padding: 20px;
@@ -131,20 +116,21 @@
             transition: transform 0.3s ease, background 0.3s ease;
             box-shadow: 0 0 10px rgba(0,191,255,0.2);
         }
-
         .sollicitatie-card:hover {
             transform: scale(1.08);
             background: rgba(255,255,255,0.15);
             box-shadow: 0 0 25px #00bfff;
         }
-
         .sollicitatie-card img {
             width: 80px;
             height: 80px;
             margin-bottom: 10px;
         }
+        .sollicitatie-card p {
+            font-size: 18px;
+        }
 
-        /* Staff Sectie */
+        /* Staff */
         .staff {
             max-width: 1100px;
             margin: 60px auto;
@@ -154,19 +140,16 @@
             box-shadow: 0 0 35px rgba(0,0,0,0.9);
             text-align: center;
         }
-
         .staff h2 {
             font-size: 40px;
             color: #00bfff;
             margin-bottom: 30px;
         }
-
         .staff-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
             gap: 35px;
         }
-
         .staff-card {
             background: rgba(255,255,255,0.05);
             padding: 20px;
@@ -175,12 +158,10 @@
             transition: transform 0.4s ease, box-shadow 0.4s ease;
             box-shadow: 0 0 15px rgba(0, 191, 255, 0.1);
         }
-
         .staff-card:hover {
             transform: translateY(-10px) scale(1.05);
             box-shadow: 0 0 35px rgba(0,191,255,0.7);
         }
-
         .staff-card img {
             width: 120px;
             height: 120px;
@@ -189,17 +170,13 @@
             box-shadow: 0 0 20px #00bfff;
             transition: transform 0.3s;
         }
-
         .staff-card:hover img {
             transform: rotate(3deg) scale(1.08);
         }
-
         .staff-card p {
             font-size: 18px;
             font-weight: 600;
         }
-
-        /* Badge voor rollen */
         .badge {
             display: inline-block;
             padding: 5px 10px;
@@ -209,13 +186,12 @@
             font-weight: bold;
             box-shadow: 0 0 8px currentColor;
         }
-
         .supervisor { color: #00bfff; border: 1px solid #00bfff; }
         .admin { color: #ff0077; border: 1px solid #ff0077; }
         .moderator { color: #00ff94; border: 1px solid #00ff94; }
         .support { color: #ffd700; border: 1px solid #ffd700; }
 
-        /* Shop Sectie */
+        /* Shop */
         .shop {
             max-width: 600px;
             margin: 60px auto;
@@ -225,24 +201,21 @@
             box-shadow: 0 0 25px rgba(0,0,0,0.9);
             text-align: center;
         }
-
         .shop h2 {
             font-size: 36px;
             color: #00bfff;
         }
-
         .shop p {
             font-size: 24px;
             animation: pulse 1.5s infinite;
         }
-
         @keyframes pulse {
             0% { text-shadow: 0 0 10px #00bfff; }
             50% { text-shadow: 0 0 25px #00bfff; }
             100% { text-shadow: 0 0 10px #00bfff; }
         }
 
-        /* Discord Sectie */
+        /* Discord */
         .discord {
             max-width: 600px;
             margin: 60px auto;
@@ -252,12 +225,10 @@
             text-align: center;
             box-shadow: 0 0 25px rgba(0,0,0,0.9);
         }
-
         .discord h2 {
             color: #00bfff;
             margin-bottom: 20px;
         }
-
         .discord a {
             display: inline-block;
             margin: 10px;
@@ -267,8 +238,8 @@
             text-decoration: none;
             border-radius: 10px;
             transition: background 0.3s;
+            font-weight: 600;
         }
-
         .discord a:hover {
             background: #008fcc;
             box-shadow: 0 0 15px #00bfff;
@@ -290,11 +261,55 @@
             z-index: 2000;
             text-decoration: none;
         }
-
         .apv-float:hover {
             background: #008fcc;
             box-shadow: 0 0 25px #00bfff;
             transform: scale(1.1);
+        }
+
+        /* Popup */
+        #join-popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0,0,0,0.95);
+            padding: 50px;
+            border-radius: 15px;
+            box-shadow: 0 0 25px rgba(0,0,0,0.8);
+            z-index: 2000;
+            text-align: center;
+            max-width: 450px;
+        }
+        #join-popup h2 {
+            color: #00bfff;
+            margin-bottom: 10px;
+        }
+        #join-popup p {
+            font-size: 18px;
+        }
+        #join-popup button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background: #00bfff;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        #join-popup button:hover {
+            background: #008fcc;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: rgba(0,0,0,0.85);
+            color: #ccc;
+            margin-top: 60px;
         }
     </style>
 </head>
@@ -302,9 +317,9 @@
     <!-- Particle Background -->
     <div id="particles-js"></div>
 
-    <!-- Navigatie -->
+    <!-- Header & Nav -->
     <header>
-        <img src="server_logo.webp" alt="Utrecht Logo">
+        <img src="server_logo.webp" alt="Utrecht RP Logo">
         <nav>
             <ul>
                 <li><a href="#home">Home</a></li>
@@ -329,17 +344,17 @@
     <section id="sollicitaties" class="sollicitaties">
         <h2>Solliciteer Hier</h2>
         <div class="sollicitaties-grid">
-            <a href="https://docs.google.com/forms/d/13j9bFmUXb9DaMr3msSke8UeCUMw6o8HgO2U8_gBCToE" target="_blank" class="sollicitatie-card">
+            <a href="https://docs.google.com/forms/d/13j9bFmUXb9DaMr3msSke8UeCUMw6o8HgO2U8_gBCToE/viewform" target="_blank" class="sollicitatie-card">
                 <img src="politie.webp" alt="Politie"><p>Politie</p>
             </a>
-            <a href="https://docs.google.com/forms/d/1H46BEu8XKHE0pVIIkOm_rlh1NyrjtKPS6fmLJ3ZGc2g" target="_blank" class="sollicitatie-card">
+            <a href="https://docs.google.com/forms/d/1H46BEu8XKHE0pVIIkOm_rlh1NyrjtKPS6fmLJ3ZGc2g/viewform" target="_blank" class="sollicitatie-card">
                 <img src="Kmar.webp" alt="KMar"><p>KMar</p>
+            </a>
+            <a href="https://docs.google.com/forms/d/108eBGSCO5BmNuow_p2nlQulUX79mi2nYaVL1rcMAhiY/viewform" target="_blank" class="sollicitatie-card">
+                <img src="anwb.webp" alt="ANWB"><p>ANWB</p>
             </a>
             <div class="sollicitatie-card">
                 <img src="ambu.webp" alt="Ambulance"><p>Ambulance (In Dev)</p>
-            </div>
-            <div class="sollicitatie-card">
-                <img src="anwb.webp" alt="ANWB"><p>ANWB (In Dev)</p>
             </div>
             <div class="sollicitatie-card">
                 <img src="advocaat.webp" alt="Advocaat"><p>Advocaat (In Dev)</p>
@@ -388,19 +403,32 @@
     <!-- Discord -->
     <section id="discord" class="discord">
         <h2>Onze Discords</h2>
-        <a href="#">Onderwereld Discord</a>
-        <a href="#">Overheid Discord</a>
-        <a href="#">Support Discord</a>
+        <a href="https://discord.gg/u75Dx94uQH" target="_blank">Onderwereld</a>
+        <a href="https://discord.gg/5DraMgeKnf" target="_blank">Hoofd</a>
+        <a href="https://discord.gg/ffZe8zCM5R" target="_blank">Support</a>
     </section>
 
     <!-- APV Floating knop -->
-    <a href="https://docs.google.com/document/d/1SLi_lUfo8YDmtOm-1dwQ3rdzrKlQW_qSicNEYhatXt8/edit"
-       class="apv-float" target="_blank">📜 APV</a>
+    <a href="https://docs.google.com/document/d/1SLi_lUfo8YDmtOm-1dwQ3rdzrKlQW_qSicNEYhatXt8/edit" class="apv-float" target="_blank">📜 APV</a>
 
-    <!-- Particles.js Script -->
+    <!-- Join FiveM Popup -->
+    <div id="join-popup">
+        <h2>Utrecht Roleplay</h2>
+        <p>Onze FiveM-server is momenteel in ontwikkeling. Check onze Discord voor updates!</p>
+        <button onclick="closeJoinPopup()">Sluiten</button>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        &copy; 2025 Utrecht Roleplay | Gemaakt door !Yous💡
+    </footer>
+
+    <!-- Particle background script -->
     <script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
     <script>
         particlesJS.load('particles-js', 'https://cdn.jsdelivr.net/gh/VincentGarreau/particles.js/particles.json');
+        function openJoinPopup() { document.getElementById("join-popup").style.display = "block"; }
+        function closeJoinPopup() { document.getElementById("join-popup").style.display = "none"; }
     </script>
 </body>
 </html>
